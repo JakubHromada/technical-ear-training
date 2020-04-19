@@ -1,0 +1,42 @@
+.header-wrap {
+    background: linear-gradient(93deg, #314455 0%, #49657e 100%);
+    border-radius: 0.5em;
+    border-bottom-left-radius: 45%;
+    border-bottom-right-radius: 0%;
+    border-bottom: 1px solid #018786;
+    margin-bottom: -2.5em;
+
+    .header {
+        color: $secondary-white;
+        padding: 2.5em 0;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        font-size: 1.7em;
+    }
+}
+
+.mdc-layout-wrap {
+    margin: 0 1em;
+
+    .training-selection-button {
+        width: 100%;
+        height: 5em;
+        
+        @include mdc-button-container-fill-color($primary-button);
+        @include mdc-button-outline-color($primary-white);
+        @include mdc-button-ink-color($base-dark);
+        @include mdc-button-shape-radius(3em); 
+
+        &.active {
+            @include mdc-button-ink-color($primary-white);
+            @include mdc-button-container-fill-color($secondary-button);
+        }
+    }
+}
+
+.app-fab--absolute {
+    position: fixed;
+    bottom: 2em;
+    right: 1em;
+}

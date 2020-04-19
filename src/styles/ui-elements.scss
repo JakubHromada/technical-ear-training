@@ -1,0 +1,11 @@
+@import '../styles/variables.scss';
+
+.bottom-bar {
+    position: fixed;
+    bottom: 0;
+    background-color: $primary-white;
+}
+
+.text-primary {
+    color: $primary-white;
+}

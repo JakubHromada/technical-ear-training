@@ -1,28 +1,73 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Vue from 'vue';
+
+import MButton from 'material-components-vue/dist/button';
+import MGrid from  'material-components-vue/dist/layout-grid';
+import MTab from 'material-components-vue/dist/tabs';
+import MIcon from 'material-components-vue/dist/icon';
+import MFab from 'material-components-vue/dist/fab';
+import MFormField from 'material-components-vue/dist/form-field';
+import MSelect from 'material-components-vue/dist/select';
+import MList from 'material-components-vue/dist/list';
+import MFloatingLabel from 'material-components-vue/dist/floating-label';
+import MLineRipple from 'material-components-vue/dist/line-ripple';
+
+Vue.use(MButton);
+Vue.use(MGrid);
+Vue.use(MTab);
+Vue.use(MIcon);
+Vue.use(MFab);
+Vue.use(MFormField);
+Vue.use(MSelect);
+Vue.use(MList);
+Vue.use(MFloatingLabel);
+Vue.use(MLineRipple);
 
 export default {
   name: 'App',
-  components: {
-    HelloWorld
-  }
+  mounted() {
+        this.loadSamplesIntoBuffer("/audioOne.wav", "audioOne");
+    },
+    data: function () {
+         return {
+             audioBuffer: [],
+             begginerPlaySound: null
+         }
+    },
+    methods: {
+      loadSamplesIntoBuffer(url, key) {      
+
+        const audioCtx = this.$store.state.audioCtx;
+        let request = new XMLHttpRequest();
+        let destBuffer = [];
+        request.open('GET', url, true);
+        request.responseType = 'arraybuffer';
+
+        request.onload = function() 
+        {
+            audioCtx.decodeAudioData(request.response,
+            function(buffer) {
+                destBuffer[key] = buffer;
+            },
+            function() {
+                alert("The file " + url + " could not be loaded!");
+            });
+        }
+        request.send();
+        
+        this.$store.dispatch('setAudioBuffer', destBuffer);
+    },
+  },
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  @import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500");
+  @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 </style>

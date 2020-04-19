@@ -1,0 +1,23 @@
+#app {
+    position: relative;
+    height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+    text-decoration: none;
+}
+
+body
+{
+    font-family: 'Roboto', sans-serif;
+    background-color: $base-dark;
+    margin:  0;
+    padding: 0;
+}
+
+select {
+    font-family: 'Roboto', sans-serif;
+    -webkit-appearance: none;
+}
